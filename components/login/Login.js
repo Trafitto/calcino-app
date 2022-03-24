@@ -3,11 +3,12 @@ import React, {useState} from "react";
 import fetcher from "../../service/fetcher";
 import Button from "../button/Button";
 import Input from "../input/Input";
-
+import { useAuth } from "../context/authContext";
 export default function LoginPage(){
     const router = useRouter()
     const [user, setUser] = useState("")
     const [password, setPassword] = useState("")
+    const { login, logout } = useAuth();
 
     if(typeof window != 'undefined' && localStorage.getItem('user')){
         router.push("/")
@@ -30,6 +31,7 @@ export default function LoginPage(){
                     <Input type="text" label="username" required={true} onChange={setUser}/>
                     <Input type="password" label="password" required={true} onChange={setPassword}/>
                     <Button text={'Login'} onClick={handleLogin} />
+                    <Button text={'Login Google'} onClick={login} />
                 </div>
             </div>
 
